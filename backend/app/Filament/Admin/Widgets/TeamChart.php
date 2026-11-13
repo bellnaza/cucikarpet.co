@@ -2,9 +2,8 @@
 
 namespace App\Filament\Admin\Widgets;
 
-use App\Filament\Admin\RangedChart;
-
 use App\Enums\OrderStatus;
+use App\Filament\Admin\RangedChart;
 
 class TeamChart extends RangedChart
 {

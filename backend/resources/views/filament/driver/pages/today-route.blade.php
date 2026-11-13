@@ -6,7 +6,7 @@
         .ck-seg { display:inline-flex; border:1px solid var(--ck-line); border-radius:10px; overflow:hidden; }
         .ck-seg button { padding:8px 14px; font-weight:600; font-size:.88rem; }
         .ck-seg button[aria-pressed="true"] { background:var(--ck-brand); color:#fff; }
-        .ck-select { border:1px solid var(--ck-line); border-radius:10px; padding:8px 10px; background:var(--ck-surface); font-size:.9rem; }
+        .ck-select { border:1px solid var(--ck-line); border-radius:10px; padding:8px 2.25rem 8px 10px; background-color:var(--ck-surface); background-repeat:no-repeat; background-position:right .6rem center; background-size:1rem; min-width:170px; font-size:.9rem; }
         .ck-trip { background:var(--ck-brand); color:#fff; border-radius:14px; padding:16px 18px; display:flex; justify-content:space-between; gap:14px; align-items:center; flex-wrap:wrap; }
         .ck-trip .s { display:flex; gap:24px; flex-wrap:wrap; }
         .ck-trip .s div { display:flex; flex-direction:column; }

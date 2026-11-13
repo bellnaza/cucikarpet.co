@@ -37,8 +37,8 @@ class StatsOverview extends BaseWidget
 
         return [
             Stat::make('Order aktif', $active)->description('belum selesai')->icon('heroicon-o-clipboard-document-list'),
-            Stat::make('Pickup hari ini', $pickups)->description($today->format('D, j M'))->icon('heroicon-o-arrow-down-tray')->color('info'),
-            Stat::make('Delivery hari ini', $deliveries)->description($today->format('D, j M'))->icon('heroicon-o-truck')->color('info'),
+            Stat::make('Pickup hari ini', $pickups)->description($today->locale('ms')->translatedFormat('D, j M'))->icon('heroicon-o-arrow-down-tray')->color('info'),
+            Stat::make('Delivery hari ini', $deliveries)->description($today->locale('ms')->translatedFormat('D, j M'))->icon('heroicon-o-truck')->color('info'),
             Stat::make('Di bengkel', $workshop->sum('items_count').' karpet')->description($workshop->count().' order')->icon('heroicon-o-sparkles')->color('warning'),
             Stat::make('Belum bayar', OrderPricing::rm((clone $unpaid)->sum('total')))->description((clone $unpaid)->count().' order')->color('warning'),
             Stat::make('Nilai bulan ini', OrderPricing::rm($month->sum('total')))->description('14 hari terakhir')->chart($spark)->color('primary'),

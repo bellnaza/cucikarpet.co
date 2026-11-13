@@ -24,7 +24,8 @@ class PanelAccessTest extends CkTestCase
         $driver = $this->user(UserRole::Driver, Team::create(['name' => 'Team A']));
 
         $this->actingAs($driver)->get('/admin')->assertForbidden();
-        $this->actingAs($driver)->get('/driver')->assertOk()->assertSee('Laluan saya');
+        $this->actingAs($driver)->get('/driver')->assertRedirect('/driver/laluan');
+        $this->actingAs($driver)->get('/driver/laluan')->assertOk()->assertSee('Laluan saya');
     }
 
     public function test_admin_pages_load(): void
@@ -39,7 +40,7 @@ class PanelAccessTest extends CkTestCase
         $this->actingAs($admin)->get('/admin/orders/'.$order->id)->assertOk()->assertSee($order->number.'-01');
         $this->actingAs($admin)->get('/admin/orders/'.$order->id.'/edit')->assertOk();
         $this->actingAs($admin)->get('/admin/email-logs')->assertOk();
-        $this->actingAs($admin)->get('/driver')->assertOk()->assertSee($order->number);
+        $this->actingAs($admin)->get('/driver/laluan')->assertOk()->assertSee($order->number);
     }
 
     public function test_driver_route_only_shows_own_team(): void
@@ -51,8 +52,8 @@ class PanelAccessTest extends CkTestCase
         $mine = $svc->create($this->customer(), [$this->carpet('standard', 5, 7)], ['pickup_date' => today(), 'team_id' => $a->id]);
         $other = $svc->create($this->customer(), [$this->carpet('standard', 5, 7)], ['pickup_date' => today(), 'team_id' => $b->id]);
 
-        $this->actingAs($this->user(UserRole::Driver, $a))->get('/driver')
-            ->assertSee($mine->number)->assertDontSee($other->number);
+        $this->actingAs($this->user(UserRole::Driver, $a))->get('/driver/laluan')
+            ->assertOk()->assertSee($mine->number)->assertDontSee($other->number);
     }
 
     public function test_queued_email_is_sent_and_logged(): void

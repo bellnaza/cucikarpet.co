@@ -82,7 +82,7 @@ class OrderResource extends Resource
                 Forms\Components\Section::make('Jadual')->columns(2)->schema([
                     Forms\Components\DatePicker::make('pickup_date')->label('Tarikh pickup')->default(today()->addDay()),
                     Forms\Components\Select::make('pickup_slot')->label('Slot')->options(array_combine(config('cucikarpet.slots'), config('cucikarpet.slots'))),
-                    Forms\Components\Select::make('team_id')->label('Team')->relationship('team', 'name', fn (Builder $q) => $q->where('active', true))
+                    Forms\Components\Select::make('team_id')->label('Team')->relationship('team', 'name', fn (Builder $query) => $query->where('active', true))
                         ->helperText('Tarikh + team diisi = status terus "Pickup dijadual".'),
                     Forms\Components\DatePicker::make('delivery_date')->label('Tarikh delivery')->hiddenOn('create'),
                     Forms\Components\Textarea::make('notes')->label('Nota untuk team')->rows(2)->columnSpanFull()
@@ -152,9 +152,9 @@ class OrderResource extends Resource
                     ->placeholder('Semua order')->trueLabel('Aktif sahaja')->falseLabel('Selesai / batal')
                     ->default(true)
                     ->queries(
-                        true: fn (Builder $q) => $q->active(),
-                        false: fn (Builder $q) => $q->whereIn('status', [OrderStatus::Selesai->value, OrderStatus::Batal->value]),
-                        blank: fn (Builder $q) => $q,
+                        true: fn (Builder $query) => $query->active(),
+                        false: fn (Builder $query) => $query->whereIn('status', [OrderStatus::Selesai->value, OrderStatus::Batal->value]),
+                        blank: fn (Builder $query) => $query,
                     ),
                 Tables\Filters\SelectFilter::make('status')->label('Status')->options(OrderStatus::options())->multiple(),
                 Tables\Filters\SelectFilter::make('team_id')->label('Team')->relationship('team', 'name'),
@@ -170,7 +170,7 @@ class OrderResource extends Resource
             ])
             ->recordUrl(fn (Order $record) => self::getUrl('view', ['record' => $record]))
             ->defaultSort('created_at', 'desc')
-            ->modifyQueryUsing(fn (Builder $q) => $q->with(['customer', 'team']));
+            ->modifyQueryUsing(fn (Builder $query) => $query->with(['customer', 'team']));
     }
 
     public static function infolist(Infolist $infolist): Infolist

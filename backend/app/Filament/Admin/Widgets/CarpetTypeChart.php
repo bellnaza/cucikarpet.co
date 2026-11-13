@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Widgets;
 
 use App\Filament\Admin\RangedChart;
-
 use App\Models\CarpetType;
 use App\Models\OrderItem;
 

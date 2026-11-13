@@ -31,7 +31,7 @@ class TodayRoute extends Page
 
     protected static ?string $title = 'Laluan saya';
 
-    protected static string $routePath = '/';
+    protected static ?string $slug = 'laluan';
 
     public string $day = 'today';
 

@@ -42,7 +42,7 @@ abstract class RangedChart extends ChartWidget
             'indexAxis' => 'y',
             'plugins' => ['legend' => ['display' => false]],
             'scales' => [
-                'x' => ['beginAtZero' => true, 'grid' => ['color' => 'rgba(127,127,127,.15)']],
+                'x' => ['beginAtZero' => true, 'ticks' => ['precision' => 0], 'grid' => ['color' => 'rgba(127,127,127,.15)']],
                 'y' => ['grid' => ['display' => false]],
             ],
         ];
